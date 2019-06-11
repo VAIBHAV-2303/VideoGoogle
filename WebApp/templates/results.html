@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+	<title>
+		VideoGoogle
+	</title>
+</head>
+<body>
+	<h1>
+		Welcome To Video Google
+	</h1>
+	<h3>
+		Results
+	</h3>
+
+	{% for i in range(10): %}
+	<div style="float: left; margin-right: 60px; margin-bottom: 20px;">
+		<img src="{{ '../static/Output/' + i|string + '.jpg'}}">
+	</div>
+	{% endfor %}
+	<a href="/">
+   		<button>Again?</button>
+	</a>
+</body>
+<script type="text/javascript">
+	(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
+</script>
+</html

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+	<title>
+		VideoGoogle
+	</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='imgareaselect-default.css') }}"/>
+
+</head>
+<body>
+	<h1>
+		Welcome To Video Google
+	</h1>
+	<h3>
+		Please select a region
+	</h3>
+	<img src="{{ frame }}" id='photo' style="margin-left: 500px; margin-top: 50px;">
+	<br/>
+	<button onclick="query()" style="margin-left: 620px; margin-top: 10px;">Query</button>
+</body>
+<script type="text/javascript">
+	var data = {};
+	$(document).ready(function () {
+    	$('#photo').imgAreaSelect({
+        	handles: true,
+        	onSelectEnd: function(img, selection){
+        					data['X1'] = selection.x1;
+        					data['X2'] = selection.x2;
+        					data['Y1'] = selection.y1;
+        					data['Y2'] = selection.y2;		
+    					}
+    	});
+	});
+
+	function query(){
+		if(data['X1']!=undefined){
+			$.post("/receiveCoords", JSON.stringify(data), function(){});
+			setTimeout(results, 2000);
+		}
+	}
+
+	function results(){
+		window.location.replace("/results");
+	}
+
+</script>
+  	<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+  	<script type="text/javascript" src="{{ url_for('static', filename='jquery.imgareaselect.pack.js') }}"></script>
+</html>
